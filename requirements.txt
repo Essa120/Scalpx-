@@ -1,4 +1,4 @@
 requests
 python-dotenv
 pyTelegramBotAPI
-twelve-data
+twelvedata
