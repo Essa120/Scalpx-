@@ -1,16 +1,12 @@
 import requests
 import time
-import os
-import logging
-from datetime import datetime
 from telegram import Bot
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # إعدادات البوت
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-CHAT_ID = os.getenv("CHAT_ID")
+BOT_TOKEN = "7621940570:AAH4fS66qAJXn6h33AzRJK7Nk8tiIwwR_kg"
+CHAT_ID = "6301054652"
+API_KEY = "1e1fd8be76ee4b0f9a708bff94d6b5b3"  # Twelve Data API Key
+
 bot = Bot(token=BOT_TOKEN)
 
 # أدوات المراقبة
@@ -23,7 +19,6 @@ ASSETS = {
 }
 
 API_URL = "https://api.twelvedata.com/time_series"
-API_KEY = os.getenv("OPENAI_API_KEY")
 INTERVAL = "5min"
 
 sent_signals = {}
