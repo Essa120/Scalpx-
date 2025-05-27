@@ -2,14 +2,13 @@ import requests
 import time
 from telegram import Bot
 
-# إعدادات البوت
+# بيانات حساسة (لا ينصح بتركها مكشوفة، لكن حسب طلبك)
 BOT_TOKEN = "7621940570:AAH4fS66qAJXn6h33AzRJK7Nk8tiIwwR_kg"
 CHAT_ID = "6301054652"
-API_KEY = "1e1fd8be76ee4b0f9a708bff94d6b5b3"  # Twelve Data API Key
+API_KEY = "1e1fd8be76ee4b0f9a708bff94d6b5b3"
 
 bot = Bot(token=BOT_TOKEN)
 
-# أدوات المراقبة
 ASSETS = {
     "GOLD": "XAU/USD",
     "BTC-USD": "BTC/USD",
@@ -20,10 +19,8 @@ ASSETS = {
 
 API_URL = "https://api.twelvedata.com/time_series"
 INTERVAL = "5min"
-
 sent_signals = {}
 
-# دالة الحصول على البيانات
 def get_price(symbol):
     try:
         response = requests.get(API_URL, params={
@@ -42,7 +39,6 @@ def get_price(symbol):
         print(f"Error fetching data for {symbol}: {e}")
         return None, None
 
-# دالة تحليل التقاطع
 def check_crossover(current, previous):
     if current > previous:
         return "BUY"
@@ -50,14 +46,12 @@ def check_crossover(current, previous):
         return "SELL"
     return None
 
-# إرسال الإشعار
 def send_signal(asset, action, price):
     msg = f"إشارة {action} على {asset} @ {price}"
     if sent_signals.get(asset) != msg:
         bot.send_message(chat_id=CHAT_ID, text=msg)
         sent_signals[asset] = msg
 
-# تشغيل السكربت
 def run_bot():
     for name, symbol in ASSETS.items():
         current, previous = get_price(symbol)
