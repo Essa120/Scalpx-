@@ -2,10 +2,10 @@ import requests
 import time
 from telegram import Bot
 
-# بيانات حساسة (لا ينصح بتركها مكشوفة، لكن حسب طلبك)
+# إعدادات البوت - حالياً مكشوفة حسب طلبك
 BOT_TOKEN = "7621940570:AAH4fS66qAJXn6h33AzRJK7Nk8tiIwwR_kg"
 CHAT_ID = "6301054652"
-API_KEY = "1e1fd8be76ee4b0f9a708bff94d6b5b3"
+API_KEY = "1e1fd8be76ee4b0f9a708bff9f3d4b52"
 
 bot = Bot(token=BOT_TOKEN)
 
@@ -19,6 +19,7 @@ ASSETS = {
 
 API_URL = "https://api.twelvedata.com/time_series"
 INTERVAL = "5min"
+
 sent_signals = {}
 
 def get_price(symbol):
@@ -56,6 +57,7 @@ def run_bot():
     for name, symbol in ASSETS.items():
         current, previous = get_price(symbol)
         if current and previous:
+            print(f"{name} | Current: {current} | Previous: {previous}")
             signal = check_crossover(current, previous)
             if signal:
                 send_signal(name, signal, current)
